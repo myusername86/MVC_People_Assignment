@@ -1,35 +1,51 @@
 ﻿@using MVC_People.Models.PeopleViewModel
 @model PeopleViewModel
 
-<form method="get" asp-action="Index">
-    <input type="text" name="searchTerm" value="@Model.search" />
-    <input type="submit" value="Search" />
-</form>
+@{
+    ViewData["Title"] = "People List";
+}
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>City</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var person in Model.People)
-        {
+<div class="container mt-4">
+    <center><h1>People List</h1></center>
+
+    <form method="get" asp-action="Index" class="mb-3">
+        <br />
+        <br />
+        <div class="form-group">
+            <input type="text" name="searchTerm" class="form-control" placeholder="Search by name or city" value="@Model.search" />
+        </div>
+        <br />
+        <br />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <br />
+    <br />
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-success">Create New Person</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>@person.Name</td>
-                <td>@person.City</td>
-                <td><a asp-action="Details" asp-route-id="@person.Id">Details</a></td>
+                <th>Name</th>
+                <th>City</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-
-<a asp-action="Create">Create New Person</a>
-<div class="container">
-    @foreach(var person in Model.People)
-    {
-        <partial name="PeoplePartial" model="person"/>
-    }
+        </thead>
+        <tbody>
+            @foreach (var person in Model.People)
+            {
+                <tr>
+                    <td>@person.Name</td>
+                    <td>@person.City</td>
+                    <td><a asp-action="Details" asp-route-id="@person.Id" class="btn btn-info btn-sm">Details</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
