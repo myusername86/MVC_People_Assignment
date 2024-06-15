@@ -1,21 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MVC_People.Models
+﻿namespace MVC_People.Models.Entity
 {
     public class Person
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public string PhoneNumber { get; set; }
+        public int PhoneNumber { get; set; }
 
         public string City { get; set; }
+
     }
-
-
-
-
-
 }
-
-

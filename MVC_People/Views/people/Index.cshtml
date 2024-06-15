@@ -1,0 +1,35 @@
+﻿@using MVC_People.Models.PeopleViewModel
+@model PeopleViewModel
+
+<form method="get" asp-action="Index">
+    <input type="text" name="searchTerm" value="@Model.search" />
+    <input type="submit" value="Search" />
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var person in Model.People)
+        {
+            <tr>
+                <td>@person.Name</td>
+                <td>@person.City</td>
+                <td><a asp-action="Details" asp-route-id="@person.Id">Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create">Create New Person</a>
+<div class="container">
+    @foreach(var person in Model.People)
+    {
+        <partial name="PeoplePartial" model="person"/>
+    }
+</div>
